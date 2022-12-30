@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var showAddTaskView: Bool = false
+    @StateObject var realmManager: RealmManager = RealmManager()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack(alignment: .bottomTrailing) {
+            TaskUiView()
+                .environmentObject(realmManager)
+            
+            SmallAddButton()
+                .padding()
+                .onTapGesture {
+                    showAddTaskView.toggle()
+                }
         }
-        .padding()
+        .sheet(isPresented: $showAddTaskView, content: {
+            AddTaskView()
+                .environmentObject(realmManager)
+        })
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .background(Color(hue: 0.086, saturation: 0.141, brightness: 0.972))
     }
 }
 

@@ -9,7 +9,17 @@ import SwiftUI
 
 struct SmallAddButton: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Circle()
+                .frame(width: 50)
+                .foregroundColor(Color.green)
+            
+            Text("+")
+                .font(.title)
+                .fontWeight(.heavy)
+                .foregroundColor(Color.white)
+        }
+        .frame(height: 50)
     }
 }
 
